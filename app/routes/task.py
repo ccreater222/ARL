@@ -38,6 +38,7 @@ base_search_task_fields = {
     'options.riskiq_search': fields.Boolean(description="是否开启 Riskiq 调用"),
     'options.arl_search': fields.Boolean(description="是否开启 ARL 历史查询"),
     'options.crtsh_search': fields.Boolean(description="是否开启 crt.sh 查询"),
+    'options.oneforall_search': fields.Boolean(description="是否开启 OneForAll 查询"),
     'options.skip_scan_cdn_ip': fields.Boolean(description="是否跳过CDN IP端口扫描")
 
 }
@@ -68,6 +69,7 @@ add_task_fields = ns.model('AddTask', {
     "ssl_cert": fields.Boolean(),
     "fetch_api_path": fields.Boolean(),
     "crtsh_search": fields.Boolean(example=True, default=True),
+    "oneforall_search": fields.Boolean(example=True, default=True),
     "skip_scan_cdn_ip": fields.Boolean()
 })
 

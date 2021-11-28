@@ -31,7 +31,8 @@ task_data = {
         'search_engines': False,
         'ssl_cert': False,
         'fofa_search': False,
-        'crtsh_search': False
+        'crtsh_search': False,
+        'oneforall_search':True
     }
 }
 

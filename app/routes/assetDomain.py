@@ -115,6 +115,7 @@ class ARLAssetDomain(ARLResource):
             'ssl_cert': False,
             'fofa_search': False,
             'crtsh_search': False,
+            'oneforall_search':True,
             'related_scope_id': scope_id
         }
 

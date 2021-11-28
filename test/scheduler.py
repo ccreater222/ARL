@@ -15,6 +15,7 @@ options = {
     'port_scan_type': 'test',
     'port_scan': True,
     'crtsh_search': False,
+    'oneforall_search': True,
     'site_identify': True
 }
 

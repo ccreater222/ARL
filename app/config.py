@@ -67,7 +67,7 @@ class Config(object):
     EMAIL_USERNAME = ""
     EMAIL_PASSWORD = ""
     EMAIL_TO = ""
-    FORBIDDEN_DOMAINS = ["gov.cn", "edu.cn", "org.cn"]
+    FORBIDDEN_DOMAINS = []
 
     GITHUB_TOKEN = ""
     GITHUB_HASH_FILE = os.path.join(TMP_PATH, 'github.hash')

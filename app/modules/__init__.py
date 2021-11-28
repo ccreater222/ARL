@@ -27,6 +27,7 @@ class CollectSource:
     SEARCHENGINE = "search_engine"
     MONITOR = "monitor"
     CRTSH = "crtsh"
+    ONEFORALL = "oneforall"
 
 
 class TaskStatus:

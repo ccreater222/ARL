@@ -40,7 +40,8 @@ domain_config_fields = ns.model('domainConfig', {
     "alt_dns": fields.Boolean(description="DNS字典智能生成", default=True),
     "riskiq_search": fields.Boolean(description="RiskIQ 调用", default=True),
     "arl_search": fields.Boolean(description="ARL 历史查询", default=True),
-    "crtsh_search": fields.Boolean(description="crtsh 查询", default=True)
+    "crtsh_search": fields.Boolean(description="crtsh 查询", default=True),
+    "oneforall_search": fields.Boolean(description="OneForAll 查询子域名", default=True)
 })
 
 '''IP 相关配置选项'''

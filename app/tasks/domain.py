@@ -12,6 +12,8 @@ from app.modules import ScanPortType, DomainDictType, CollectSource, TaskStatus
 from app.services import fetchCert, run_risk_cruising, run_sniffer
 from app.services.commonTask import CommonTask
 from bson.objectid import ObjectId
+from OneForAll.oneforall import OneForAll
+from OneForAll.common.utils import get_subdomains
 '''
 域名爆破
 '''
@@ -998,6 +1000,28 @@ class DomainTask(CommonTask):
         }
 
         return modules.DomainInfo( **item )
+    def oneforall_search(self):
+        t1 = time.time()
+        logger.info("start oneforall search {}".format(self.base_domain))
+        ofa = OneForAll(target=self.base_domain)
+        ofa.access_internet = True
+        ofa.enable_wildcard = True
+        ofa.config_param()
+        ofa.check_param()
+        ofa.domain = self.base_domain
+        result = get_subdomains(ofa.main())
+        domain_info_list = self.build_domain_info(result)
+        
+    
+        if self.task_tag == "task":
+            domain_info_list = self.clear_domain_info_by_record(domain_info_list)
+            self.save_domain_info_list(domain_info_list, source=CollectSource.ONEFORALL)
+
+        self.domain_info_list.extend(domain_info_list)
+        elapse = time.time() - t1
+        logger.info("end oneforall search {} {} elapse {}".format(
+            self.base_domain, len(domain_info_list), elapse))
+
 
     def domain_fetch(self):
         '''****域名爆破开始****'''
@@ -1012,7 +1036,13 @@ class DomainTask(CommonTask):
             if domain_info:
                 self.domain_info_list.append(domain_info)
                 self.save_domain_info_list([domain_info])
-
+        # ***OneForAll查询****
+        if self.options.get("oneforall_search"):
+            self.update_task_field("status", "oneforall_search")
+            t1 = time.time()
+            self.oneforall_search()
+            elapse = time.time() - t1
+            self.update_services("oneforall_search", elapse)
         # ***RiskIQ查询****
         if self.options.get("riskiq_search") and services.riskiq_quota() > 0:
             self.update_task_field("status", "riskiq_search")

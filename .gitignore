@@ -1,3 +1,10 @@
+# DIY
+
+docker/arl_web.log
+docker/arl_worker.log
+docker/image
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
